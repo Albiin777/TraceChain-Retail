@@ -1,0 +1,725 @@
+# TraceChain — Complete Retailer Inventory & Blockchain Management Portal
+
+## 1. Project Overview
+
+Build a complete, responsive, functional web application called **TraceChain Retailer Portal**, a retailer-facing inventory and supply-chain management platform powered by Hyperledger Fabric.
+
+Use the attached dashboard screenshot as the primary visual reference. Reproduce its overall layout, spacing, colors, proportions, typography, table styles, card arrangements, and navigation as closely as possible, while improving usability and responsiveness.
+
+This is an actual web application, not a static mockup or a collection of nonfunctional screens. Every navigation item, button, form, filter, table action, chart filter, QR scanner, and workflow must perform its intended function.
+
+The application is designed for retail stores that receive products from suppliers, manage batches, sell products, monitor expiry dates, track product history, and verify supply-chain records.
+
+## 2. Technology Stack
+
+Use the following stack:
+
+- **Frontend:** React with Vite and JavaScript.
+- **Styling:** Tailwind CSS with reusable components and custom CSS where necessary.
+- **Routing:** React Router.
+- **Charts:** Recharts.
+- **Icons:** Lucide React. Use simple, consistent line icons only where they improve usability.
+- **Backend:** Node.js and Express REST API.
+- **Database:** PostgreSQL for operational inventory, sales, invoices, users, and reports.
+- **Blockchain:** Hyperledger Fabric using the Fabric Gateway Node.js client and Node.js chaincode.
+- **QR codes:** A QR generation library and a camera-based QR scanner such as `html5-qrcode`.
+- **Authentication:** Secure session or token-based authentication with role-based access control.
+- **Deployment:** Docker-compatible configuration for the backend, database, and Fabric network.
+
+Keep the frontend, backend, database, and blockchain integration in separate modules. Do not place business logic, credentials, or blockchain transactions directly in React components.
+
+If backend services or Fabric credentials are not configured, provide a clearly labelled demo mode with realistic seed data and a clean service abstraction that allows real integrations later. Never pretend a demo operation has been committed to the blockchain.
+
+## 3. Visual Design System
+
+Follow the attached reference screenshot precisely.
+
+### Color palette
+
+Use these exact primary colors:
+
+- Pitch Black: `#1B1713`
+- Dark Coffee: `#3E2B22`
+- Floral White: `#F6F2EA`
+- Almond Cream: `#EADDD0`
+- Dusty Olive: `#6B734A`
+
+Use them consistently throughout the interface.
+
+Suggested application:
+
+- Sidebar: Pitch Black.
+- Main background: Floral White.
+- Primary buttons: Dark Coffee.
+- Secondary surfaces: Almond Cream and white-tinted cream.
+- Active navigation, charts, and positive indicators: Dusty Olive.
+- Warning and error states: muted amber and restrained red.
+
+### Design principles
+
+- Professional, practical, human-designed enterprise software.
+- Minimal, functional, and information-dense without being crowded.
+- Clear typography using Inter or a similar modern sans-serif font.
+- Thin borders, subtle shadows, moderate corner radii, and consistent spacing.
+- Strong visual hierarchy for headings, financial figures, stock quantities, and expiry warnings.
+- Use rectangular cards and structured tables instead of decorative dashboard illustrations.
+- No leaves, botanical graphics, landscape photographs, floating illustrations, glassmorphism, oversized gradients, or decorative organic shapes.
+- Avoid excessive rounded pills, oversized icons, unnecessary animations, and generic AI-generated landing-page aesthetics.
+- Use small status badges only when they communicate meaningful information.
+- Keep tables compact, readable, and suitable for daily retail operations.
+- Use realistic Indian product names, dates, quantities, batch IDs, and INR currency formatting.
+- Design for desktop first, then adapt cleanly to tablets and mobile devices.
+
+The result should look like a real inventory management tool used by a retail business, not a marketing website.
+
+## 4. Global Application Layout
+
+### Left sidebar
+
+Create a fixed-width dark sidebar on desktop, approximately 250 pixels wide.
+
+Display the TraceChain wordmark at the top, using clean text rather than an elaborate logo.
+
+Include these navigation items in this order:
+
+1. Overview
+2. Inventory
+3. Receive Stock
+4. Sales & Billing
+5. Batch Tracking
+6. Analytics
+7. Product History
+8. Reports
+9. Settings
+
+Each item must navigate to a dedicated page. Highlight the active route with a muted olive background and clear text contrast.
+
+At the bottom, show the logged-in retailer's initials, store name, account role, and a dropdown for account settings and logout.
+
+On mobile, collapse the sidebar into a navigation drawer.
+
+### Top header
+
+Include:
+
+- Global product and batch search.
+- A QR scanning shortcut.
+- Notification access.
+- Current date.
+- Retailer account menu.
+
+Search should support product names, SKU codes, batch numbers, and available product identifiers. Selecting a result should navigate to the appropriate product or batch detail page.
+
+### Main content
+
+Use a responsive grid with consistent margins, compact cards, and readable data tables. Preserve the reference screenshot's main dashboard composition.
+
+## 5. Dashboard — Overview Page
+
+Create the default landing page with the heading:
+
+**Good evening, GreenMart Store**
+
+Subtitle:
+
+"Here's a snapshot of your inventory and sales today."
+
+Show the current date and the actual last-updated timestamp.
+
+### A. KPI cards
+
+Display four cards:
+
+1. Total Products — 142.
+2. Active Batches — 328.
+3. Today's Sales — ₹12,430.
+4. Total Stock Value — ₹2,48,900.
+
+Each card should show a clear label, prominent figure, and relevant comparison with the previous period.
+
+Calculate these values from the database or demo dataset rather than hardcoding them in production mode.
+
+### B. Sales & Stock Trend
+
+Create an interactive Recharts visualization with:
+
+- Daily sales.
+- Stock received.
+- Stock sold.
+- Seven-day, monthly, and yearly filters.
+- Tooltips with dates and formatted values.
+- A readable legend and appropriate axes.
+
+Make the chart responsive. Keep the chart simple, using Dark Coffee, Almond Cream, and Dusty Olive.
+
+### C. Stock Status
+
+Display a donut chart and accompanying legend for:
+
+- Normal stock.
+- Near expiry.
+- Expired stock.
+- Low stock.
+
+Show the total batch count in the center. Percentages and quantities must be derived from the underlying batch data.
+
+### D. Top Selling Products
+
+Create a compact table with:
+
+- Product.
+- Units sold.
+- Revenue.
+- Relative sales indicator.
+
+Include a date-range filter and a link to view all products or sales analytics.
+
+### E. Alerts & Notifications
+
+Display actionable alerts for:
+
+- Batches expiring within seven days.
+- Low-stock products.
+- Expired products that must be removed from sale.
+- Recently received stock.
+- Failed or pending blockchain transactions, where applicable.
+
+Clicking an alert must open the corresponding filtered list or detail page.
+
+### F. Batches Needing Attention
+
+Create a table containing:
+
+- Product name.
+- Batch number.
+- Current quantity.
+- Expiry date.
+- Days remaining.
+- Status.
+- View action.
+
+Provide filters for near expiry, expired, and low stock. Clicking View opens the relevant batch details.
+
+### G. Quick Actions
+
+Provide practical shortcuts for:
+
+- Scan QR Code.
+- Receive New Stock.
+- Create New Sale.
+- View Near-Expiry Batches.
+
+These actions must open functional workflows rather than decorative buttons.
+
+## 6. Inventory Management
+
+Create a complete inventory page with searchable, sortable, paginated tables.
+
+### Product fields
+
+- Product ID.
+- SKU or barcode.
+- Product name.
+- Category.
+- Brand or manufacturer.
+- Unit of measurement.
+- Selling price.
+- Reorder threshold.
+- Active/inactive status.
+
+### Batch fields
+
+- Batch ID.
+- Product ID.
+- Manufacturing date.
+- Expiry date.
+- Supplier.
+- Quantity received.
+- Quantity sold.
+- Quantity returned.
+- Quantity wasted.
+- Available quantity.
+- Purchase cost.
+- Retail price.
+- Current owner or custodian.
+- Blockchain verification status.
+
+### Required operations
+
+- Add and edit product details.
+- View product details.
+- View all batches associated with a product.
+- Search and filter products.
+- Filter by category and stock status.
+- View stock movement history.
+- Identify duplicate or invalid product identifiers.
+- Configure low-stock thresholds.
+- Export inventory to CSV.
+
+Validate all forms and prevent negative stock quantities.
+
+Inventory adjustments must create auditable stock-movement records. Do not silently overwrite important historical transactions.
+
+## 7. Receive Stock Workflow
+
+Create a dedicated stock-receiving interface.
+
+The retailer should be able to:
+
+1. Scan a batch QR code or enter a batch ID.
+2. Retrieve product and batch details.
+3. Verify the supplier, batch status, expiry date, and current custodian.
+4. Enter the received quantity and optional remarks.
+5. Record the delivery reference and receipt timestamp.
+6. Confirm receipt.
+7. View the operation's final status.
+
+Validate that the batch exists, the sender is authorized, and the transfer is permitted.
+
+Where ownership transfer is required, submit the appropriate Fabric transaction and wait for commit confirmation before displaying the operation as successfully completed.
+
+Update PostgreSQL operational inventory only through a consistent, retry-safe workflow. Handle partial failures and duplicate submissions without double-counting stock.
+
+If a transaction fails, explain the reason and provide a retry or support option where appropriate.
+
+## 8. QR Code Scanning and Generation
+
+Build a reusable QR scanning component that can be opened from the global header, inventory, receiving, and batch tracking pages.
+
+Features:
+
+- Request camera access only when the user starts scanning.
+- Support camera scanning on compatible devices.
+- Allow manual entry of a batch ID if camera access is unavailable.
+- Display clear loading, success, invalid-code, and error states.
+- Validate scanned identifiers through the backend.
+- Display the product name, batch number, expiry date, current custodian, and verification status.
+- Provide shortcuts to receive stock or view full product history.
+
+Generate unique QR codes for registered products or batches. QR codes should contain an opaque identifier or verification URL, not sensitive information or the entire product record.
+
+Never trust product details embedded in a QR code without verifying them against the backend.
+
+## 9. Sales & Billing
+
+Create a functional point-of-sale interface.
+
+### Sales workflow
+
+- Search products by name, SKU, or barcode.
+- Select an available batch.
+- Enter quantities.
+- Calculate subtotal, discounts, and final amount.
+- Apply authorized discounts.
+- Display item-level and invoice-level totals.
+- Validate available stock before checkout.
+- Prevent sales of expired or recalled products.
+- Generate a unique invoice number.
+- Record payment method and payment status.
+- Provide an invoice preview and printable receipt.
+
+### FEFO batch selection
+
+Implement First Expired, First Out.
+
+When selecting stock for sale, prioritize the earliest-expiring eligible batch. Allow authorized staff to choose another eligible batch when necessary and record the reason.
+
+Do not permit checkout to exceed available stock.
+
+### Expiry-based dynamic pricing
+
+Support configurable discount rules based on remaining shelf life.
+
+For example, an administrator may configure discounts for products nearing expiry. These values are examples only; make the rules editable.
+
+The pricing service must:
+
+- Check the batch expiry date.
+- Calculate discounts using configured rules.
+- Display the original price, discount, and final price.
+- Prevent sales after expiry.
+- Record the applied pricing rule and final price in the sales audit trail.
+- Validate authorized overrides.
+
+If pricing rules are enforced on-chain, query or invoke the relevant chaincode. Otherwise, enforce them through the trusted backend and clearly document the trust boundary.
+
+### Returns and cancellations
+
+Support authorized returns, cancellations, and refunds with reason codes.
+
+Never delete completed sales silently. Record reversals and corresponding stock movements as auditable events.
+
+## 10. Batch Tracking
+
+Create a dedicated batch management page.
+
+Display:
+
+- Batch identifier.
+- Product.
+- Supplier.
+- Received date.
+- Expiry date.
+- Available quantity.
+- Current custodian.
+- Status.
+- Blockchain verification status.
+
+Allow users to:
+
+- Search batches.
+- Filter by expiry and stock status.
+- View complete batch details.
+- View ownership-transfer history.
+- Review receipt and sale events.
+- View returns, wastage, and disposal records.
+- Open the blockchain transaction reference.
+
+Provide a timeline view of the batch lifecycle, ordered by event time.
+
+Differentiate between the business event timestamp and the blockchain transaction commit timestamp.
+
+## 11. Product History and Supply-Chain Traceability
+
+This is a core feature of TraceChain.
+
+Build a product history page accessible through a product search, batch ID, or QR code.
+
+Show a chronological lifecycle timeline containing applicable events such as:
+
+1. Product registration.
+2. Manufacturing.
+3. Packaging.
+4. Quality inspection.
+5. Dispatch from supplier.
+6. Shipment and custody transfer.
+7. Retailer receipt.
+8. Storage-condition logging.
+9. Retail sale.
+10. Return, donation, recycling, or disposal.
+
+For every event, display:
+
+- Event type.
+- Event timestamp.
+- Recorded organization or authorized identity.
+- Relevant product or batch reference.
+- Event details.
+- Blockchain transaction ID.
+- Verification status.
+
+Show only events actually available in the system. If a lifecycle stage has not been recorded, mark it as unavailable rather than inventing a history.
+
+Allow users to open transaction details and verify that the record exists on the ledger.
+
+Display a clear explanation when a record is unavailable, pending, invalid, or unverified.
+
+## 12. Storage Conditions and Wastage
+
+Provide optional storage-condition logging.
+
+Authorized users should be able to record:
+
+- Temperature.
+- Timestamp.
+- Batch identifier.
+- Staff identity.
+- Notes.
+- Source of the measurement, such as manual entry or a connected sensor.
+
+Flag readings outside configurable product-specific limits.
+
+Clearly distinguish manually entered readings from verified sensor readings. Blockchain storage does not establish that a measurement is truthful.
+
+Support recording expired stock removal, wastage, donation, and recycling with quantities, reasons, timestamps, and authorized identities.
+
+Preserve historical records and create new events for corrections.
+
+## 13. Analytics and Forecasting
+
+Create an analytics page with date-range and product/category filters.
+
+Include:
+
+- Total sales and revenue.
+- Sales by product.
+- Sales by category.
+- Stock received versus stock sold.
+- Current inventory valuation.
+- Near-expiry inventory value.
+- Expired stock value.
+- Wastage quantities and losses.
+- Fast-moving products.
+- Slow-moving products.
+- Historical sales trends.
+- Reorder recommendations.
+
+Implement a simple, explainable baseline demand forecast using historical sales averages. If there is insufficient historical data, display a clear message instead of misleading predictions.
+
+Calculate reorder recommendations using available inventory, configured thresholds, and historical sales where possible.
+
+Provide CSV exports and ensure that all figures reconcile with the underlying database.
+
+## 14. Reports
+
+Create a reports section containing:
+
+- Inventory report.
+- Batch expiry report.
+- Stock movement report.
+- Sales report.
+- Invoice report.
+- Wastage report.
+- Returns report.
+- Blockchain transaction report.
+
+Support date ranges, product filters, batch filters, and CSV export.
+
+Where appropriate, provide print-friendly report layouts. Do not expose confidential records to unauthorized users.
+
+## 15. Notifications
+
+Implement a notification center with:
+
+- Near-expiry warnings.
+- Expired-stock warnings.
+- Low-stock alerts.
+- New stock receipts.
+- Failed blockchain operations.
+- Pending transaction confirmations.
+- Reorder reminders.
+
+Allow users to mark notifications as read. Clicking a notification should open the relevant record.
+
+Use configurable thresholds and avoid duplicate alerts for the same unresolved condition.
+
+## 16. Settings and User Management
+
+Build settings pages for:
+
+- Store profile.
+- Store name and contact details.
+- Currency and timezone.
+- Expiry warning thresholds.
+- Low-stock thresholds.
+- Dynamic pricing rules.
+- Invoice preferences.
+- User accounts and roles.
+- Security settings.
+- Blockchain connection status.
+
+Support roles such as retailer owner, manager, and staff.
+
+Apply permissions on the backend, not just by hiding frontend buttons.
+
+Only authorized users should be able to modify pricing rules, approve adjustments, manage users, or perform sensitive inventory operations.
+
+## 17. Hyperledger Fabric Integration
+
+Use the Fabric Gateway Node.js client to connect the Express backend to an authorized Fabric network.
+
+Keep all Fabric credentials and network configuration on the server. Never expose private keys, enrollment secrets, wallet contents, or peer credentials to the browser.
+
+Organize chaincode functions around clear business operations, such as:
+
+- RegisterProduct.
+- RegisterBatch.
+- ReadProduct.
+- ReadBatch.
+- RecordManufacturing.
+- RecordQualityInspection.
+- TransferCustody.
+- ConfirmReceipt.
+- RecordStorageCondition.
+- RecordSale.
+- RecordReturn.
+- RecordDisposal.
+- GetProductHistory.
+- VerifyRecord.
+
+Adapt these operations to the actual ledger schema and network permissions. Do not assume every participant can invoke every function.
+
+Use proper transaction endorsement, authorization, input validation, commit-status checks, and error handling.
+
+### Data separation
+
+Store in Hyperledger Fabric:
+
+- Authoritative product and batch lifecycle events.
+- Authorized custody transfers.
+- Relevant manufacturing and inspection records.
+- Auditable expiry-related decisions where required.
+- Hashes of important off-chain records where integrity verification is useful.
+
+Store in PostgreSQL:
+
+- Operational inventory projections.
+- Invoice details.
+- Sales line items.
+- User preferences.
+- Reporting aggregates.
+- Search indexes.
+- Dashboard data.
+
+Use a consistent event-processing strategy so the database and blockchain do not silently drift apart.
+
+Blockchain transactions should be treated as confirmed only after the network reports successful commit status. Handle conflicts, duplicate requests, retries, and failed commits.
+
+Do not put passwords, unnecessary personal information, or sensitive customer data on an immutable ledger.
+
+## 18. Backend API Structure
+
+Create REST endpoints organized by feature, for example:
+
+- `/api/auth`
+- `/api/dashboard`
+- `/api/products`
+- `/api/inventory`
+- `/api/batches`
+- `/api/receiving`
+- `/api/sales`
+- `/api/invoices`
+- `/api/returns`
+- `/api/traceability`
+- `/api/storage-conditions`
+- `/api/analytics`
+- `/api/reports`
+- `/api/notifications`
+- `/api/settings`
+- `/api/blockchain`
+
+Use proper HTTP methods, validation schemas, authentication middleware, authorization checks, pagination, consistent error responses, and structured logging.
+
+Use database transactions for related PostgreSQL operations. Implement idempotency for important operations such as sales checkout, receiving stock, and blockchain transaction submission.
+
+Document the API and include a health-check endpoint.
+
+## 19. PostgreSQL Data Model
+
+Design a normalized schema with appropriate foreign keys, constraints, indexes, and timestamps.
+
+Include tables or equivalent entities for:
+
+- Users and roles.
+- Stores.
+- Products.
+- Suppliers.
+- Batches.
+- Inventory movements.
+- Receipts.
+- Sales.
+- Sale items.
+- Invoices.
+- Returns.
+- Pricing rules.
+- Storage-condition records.
+- Wastage records.
+- Notifications.
+- Blockchain transaction references.
+- Audit logs.
+
+Use decimal-safe numeric types for money and consistent time handling. Store the business event timestamp separately from the blockchain commit timestamp.
+
+Do not use local browser storage as the permanent database.
+
+## 20. Security and Reliability
+
+Implement:
+
+- Secure authentication.
+- Role-based permissions.
+- Server-side validation.
+- Parameterized SQL queries.
+- Safe error messages.
+- Rate limiting where appropriate.
+- Audit logs for sensitive actions.
+- Environment-based configuration.
+- Secure secret management.
+- Database migrations.
+- Consistent transaction handling.
+- Proper loading, empty, success, and error states.
+- Protection against duplicate sales and stock-receipt submissions.
+
+Never use real credentials in source code. Include an `.env.example` containing placeholder variables only.
+
+## 21. Demo Mode and Seed Data
+
+Provide a working demo mode with believable sample data for GreenMart Store.
+
+Seed products such as:
+
+- Fresh Milk (1L).
+- Greek Yogurt.
+- Cheese Slice.
+- Paneer (200g).
+- Butter (100g).
+
+Create multiple batches per product, different expiry dates, suppliers, stock quantities, sales, receipts, and lifecycle events.
+
+Use consistent relationships between all sample records. The dashboard counts, inventory quantities, chart values, sales totals, and batch status must agree.
+
+Include batches that are normal, low-stock, near-expiry, and expired so every workflow can be demonstrated.
+
+Provide a clearly labelled demo identity and prevent demo data from being mistaken for verified production blockchain records.
+
+## 22. Required Pages and Routing
+
+Implement all these pages:
+
+- `/login`
+- `/dashboard`
+- `/inventory`
+- `/inventory/:productId`
+- `/receive-stock`
+- `/sales`
+- `/sales/new`
+- `/sales/:saleId`
+- `/batches`
+- `/batches/:batchId`
+- `/analytics`
+- `/product-history`
+- `/product-history/:productId`
+- `/reports`
+- `/notifications`
+- `/settings`
+
+Add suitable routes for account and administrative features where necessary.
+
+Every page must use the same visual design system, sidebar, header, spacing, and responsive behavior.
+
+## 23. Functional Acceptance Criteria
+
+Do not consider the application complete until the following workflows work:
+
+1. A user can log in to the demo environment and navigate between every page.
+2. Dashboard figures update when underlying demo data changes.
+3. Inventory search, filtering, sorting, pagination, and product details work.
+4. Stock receipt updates inventory without duplicate quantity increments.
+5. QR scanning or manual batch lookup opens the correct batch.
+6. Sales checkout validates stock, applies pricing rules, and produces an invoice.
+7. Expired products cannot be sold.
+8. FEFO selects the earliest-expiring eligible batch.
+9. Batch expiry alerts and low-stock alerts reflect the underlying data.
+10. Product history displays recorded events in chronological order.
+11. Blockchain operations clearly distinguish pending, committed, and failed states.
+12. Reports can be filtered and exported.
+13. Role restrictions are enforced by the backend.
+14. Forms show useful validation and error messages.
+15. All major layouts work on desktop, tablet, and mobile.
+16. No buttons, links, filters, or navigation elements are merely decorative.
+17. Demo mode works without Fabric credentials, while production mode uses the configured backend and Fabric network.
+18. No successful blockchain transaction is fabricated when the network is unavailable.
+
+## 24. Implementation Instructions
+
+First, build the complete frontend shell and dashboard based on the attached screenshot. Then implement each page and workflow, followed by backend APIs, PostgreSQL persistence, and Fabric integration.
+
+Use reusable components for cards, tables, status badges, filters, dialogs, forms, charts, QR scanning, and transaction-status displays.
+
+Keep the code organized into clear folders for pages, components, services, API clients, database access, chaincode, validation, and configuration.
+
+Use real data flow rather than hardcoded visual elements. Make reasonable implementation decisions without repeatedly asking for confirmation.
+
+If the environment cannot run PostgreSQL or Hyperledger Fabric directly, complete the application using an explicitly labelled demo adapter and provide the backend integration code and setup instructions needed to connect the real services.
+
+**Final goal:** Deliver a polished, fully navigable TraceChain Retailer Portal that preserves the attached reference design and functions as a practical inventory, billing, expiry-management, and blockchain traceability application. Prioritize working business workflows, accurate data, and maintainable architecture over decorative visuals.

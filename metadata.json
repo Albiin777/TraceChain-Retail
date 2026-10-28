@@ -1,0 +1,6 @@
+{
+  "name": "TraceChain Retailer Portal",
+  "description": "Retailer inventory and Hyperledger Fabric blockchain supply-chain management portal with FEFO billing, batch tracking, and provenance verification.",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
